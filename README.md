@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 ##模块说明
@@ -40,3 +41,4 @@ sc-f-gateway-first-sight 使用SpringCloud Gateway网关
 ###注意事项 
 [版本问题]
 * SpringCloud.Finchley版本兼容的SpringBoot为2.0.X
+
