@@ -1,0 +1,73 @@
+
+#配置了服务的端口为8081，配置spring.profiles.active:after_route指定了程序的spring的启动文件为after_route文件
+#server:
+#  port: 8081
+#spring:
+#  profiles:
+#    active: header_route
+
+#在application.yml再建一个配置文件，语法是三个横线，
+#在此配置文件中通过spring.profiles来配置文件名，和spring.profiles.active一致，然后配置spring cloud gateway 相关的配置
+#id标签配置的是router的id，每个router都需要一个唯一的id，uri配置的是将请求路由到哪里，本案例全部路由到http://httpbin.org:80/get
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: after_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+#  profiles: after_route
+#predicates： After=2017-01-20T17:42:47.789-07:00[America/Denver]
+#会被解析成PredicateDefinition对象 （name =After ，args= 2017-01-20T17:42:47.789-07:00[America/Denver]）。
+#在这里需要注意的是predicates的After这个配置，遵循的契约大于配置的思想，它实际被AfterRoutePredicateFactory这个类所处理，
+#这个After就是指定了它的Gateway web handler类为AfterRoutePredicateFactory，同理，其他类型的predicate也遵循这个规则
+
+#启动工程，在浏览器上访问http://localhost:8081/，会显示http://httpbin.org:80/get返回的结果，
+#此时gateway路由到了配置的uri。如果我们将配置的时间设置到当前时之后，浏览器会显示404，此时证明没有路由到配置的uri.
+
+#---
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: header_route
+#        uri: http://httpbin.org:80/get
+#        predicates:
+#        - Header=X-Request-Id, \d+
+#  profiles: header_route
+#Header Route Predicate Factory需要2个参数，一个是header名，另外一个header值，该值可以是一个正则表达式。当此断言匹配了请求的header名和值时，断言通过，进入到router的规则中去
+#在上面的配置中，当请求的Header中有X-Request-Id的header名，且header值为数字时，请求会被路由到配置的 uri
+
+
+#Spring Cloud Gateway限流
+server:
+  port: 8081
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: limit_route
+        uri: http://httpbin.org:80/get
+        predicates:
+        - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+        filters:
+        - name: RequestRateLimiter
+          args:
+            key-resolver: '#{@hostAddrKeyResolver}'
+            redis-rate-limiter.replenishRate: 1
+            redis-rate-limiter.burstCapacity: 3
+  application:
+    name: gateway-limiter
+  redis:
+    host: 192.168.227.142
+    port: 6379
+    database: 0
+    timeout: 10000
+#指定程序的端口为8081，配置了 redis的信息，并配置了RequestRateLimiter的限流过滤器，该过滤器需要配置三个参数：
+#burstCapacity，令牌桶总容量。
+#replenishRate，令牌桶每秒填充平均速率。
+#key-resolver，用于限流的键的解析器的 Bean 对象的名字。它使用 SpEL 表达式根据#{@beanName}从 Spring 容器中获取 Bean 对象。
+
