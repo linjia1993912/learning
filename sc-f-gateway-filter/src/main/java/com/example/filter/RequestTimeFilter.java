@@ -75,6 +75,7 @@ public class RequestTimeFilter implements GatewayFilter,Ordered {
         return builder.routes()
                 .route(r -> r.path("/customer/**")
                         .filters(f -> f.filter(new RequestTimeFilter())
+                                //往ResponseHeader添加一个X-Response-Default-Foo:Default-Bar
                                 .addResponseHeader("X-Response-Default-Foo", "Default-Bar"))
                         .uri("http://httpbin.org:80/get")
                         .order(0)
