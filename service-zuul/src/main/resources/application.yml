@@ -1,4 +1,4 @@
-#ÅäÖÃ×¢²áÖĞĞÄµØÖ·
+#é…ç½®æ³¨å†Œä¸­å¿ƒåœ°å€
 eureka:
   client:
     service-url:
@@ -9,9 +9,9 @@ server:
 spring:
   application:
     name: service-zuul
-#ÅäÖÃÂ·ÓÉ
-#ÒÔ/api-a/ ¿ªÍ·µÄÇëÇó¶¼×ª·¢¸øservice-ribbon·şÎñ£»
-#ÒÔ/api-b/¿ªÍ·µÄÇëÇó¶¼×ª·¢¸øservice-feign·şÎñ£»
+#é…ç½®è·¯ç”±
+#ä»¥/api-a/ å¼€å¤´çš„è¯·æ±‚éƒ½è½¬å‘ç»™service-ribbonæœåŠ¡ï¼›
+#ä»¥/api-b/å¼€å¤´çš„è¯·æ±‚éƒ½è½¬å‘ç»™service-feignæœåŠ¡ï¼›
 zuul:
   routes:
     api-a:

@@ -1,13 +1,13 @@
-#eureka-clientÅäÖÃ
+#eureka-clienté…ç½®
 server:
   port: 8762
 
-#ÅäÖÃ·şÎñÃû³Æ ĞèÒªÖ¸Ã÷spring.application.name,Õâ¸öºÜÖØÒª
+#é…ç½®æœåŠ¡åç§° éœ€è¦æŒ‡æ˜spring.application.name,è¿™ä¸ªå¾ˆé‡è¦
 spring:
   application:
     name: eureka-client
 
-#ÅäÖÃ×¢²áÖĞĞÄµØÖ·
+#é…ç½®æ³¨å†Œä¸­å¿ƒåœ°å€
 eureka:
   client:
     service-url:

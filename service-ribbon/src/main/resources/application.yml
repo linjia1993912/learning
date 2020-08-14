@@ -5,11 +5,8 @@ spring:
   application:
     name: service-ribbon
 
-#ÅäÖÃ×¢²áÖĞĞÄµØÖ·
+#é…ç½®æ³¨å†Œä¸­å¿ƒåœ°å€
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
-
-
