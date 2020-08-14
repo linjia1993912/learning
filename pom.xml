@@ -36,6 +36,7 @@
         <module>springboot-redisson-distributed-core</module>
         <module>springboot-redisson-distributed-web-test</module>
         <module>service-feign</module>
+        <module>sc-f-gateway-filter</module>
     </modules>
 
     <dependencies>

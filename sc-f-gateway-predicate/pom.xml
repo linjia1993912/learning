@@ -19,13 +19,16 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+
 	<dependencies>
+		<!--引入Gateway-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 	</dependencies>
 
+	<!--SpringCloud Finchley版本-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

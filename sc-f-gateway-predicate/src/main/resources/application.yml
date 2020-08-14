@@ -1,14 +1,12 @@
-
 server:
   port: 8081
 spring:
   profiles:
     active: header_route
 
-#\u8BF7\u6C42\u548C\u8DEF\u7531\u5339\u914D\uFF0C\u51B3\u5B9A\u4E86\u4E00\u4E2A\u8BF7\u6C42\u8D70\u54EA\u4E2A\u8DEF\u7531
+#请求和路由匹配，决定了一个请求走哪个路由
 
-#\u4E0B\u9762\u662F\u5404\u79CDPredicate\u914D\u7F6E\u8BE6\u89E3
-
+#下面是各种Predicate配置详解
 
 #After Route Predicate Factory
 ---
@@ -22,19 +20,20 @@ spring:
         - After=2017-01-20T17:42:47.789-07:00[America/Denver]
   profiles: after_route
 
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u6587\u4EF6\u4E2D\uFF0C\u914D\u7F6E\u4E86\u670D\u52A1\u7684\u7AEF\u53E3\u4E3A8081\uFF0C\u914D\u7F6Espring.profiles.active:after_route\u6307\u5B9A\u4E86\u7A0B\u5E8F\u7684spring\u7684\u542F\u52A8\u6587\u4EF6\u4E3Aafter_route\u6587\u4EF6\u3002
-#\u5728application.yml\u518D\u5EFA\u4E00\u4E2A\u914D\u7F6E\u6587\u4EF6\uFF0C\u8BED\u6CD5\u662F\u4E09\u4E2A\u6A2A\u7EBF\uFF0C\u5728\u6B64\u914D\u7F6E\u6587\u4EF6\u4E2D\u901A\u8FC7spring.profiles\u6765\u914D\u7F6E\u6587\u4EF6\u540D\uFF0C
-#\u548Cspring.profiles.active\u4E00\u81F4\uFF0C\u7136\u540E\u914D\u7F6Espring cloud gateway \u76F8\u5173\u7684\u914D\u7F6E\uFF0Cid\u6807\u7B7E\u914D\u7F6E\u7684\u662Frouter\u7684id\uFF0C
-#\u6BCF\u4E2Arouter\u90FD\u9700\u8981\u4E00\u4E2A\u552F\u4E00\u7684id\uFF0Curi\u914D\u7F6E\u7684\u662F\u5C06\u8BF7\u6C42\u8DEF\u7531\u5230\u54EA\u91CC\uFF0C\u672C\u6848\u4F8B\u5168\u90E8\u8DEF\u7531\u5230http://httpbin.org:80/get\u3002
+#在上面的配置文件中，配置了服务的端口为8081，配置spring.profiles.active:after_route指定了程序的spring的启动文件为after_route文件。
+#在application.yml再建一个配置文件，语法是三个横线，在此配置文件中通过spring.profiles来配置文件名，
+#和spring.profiles.active一致，然后配置spring cloud gateway 相关的配置，id标签配置的是router的id，
+#每个router都需要一个唯一的id，uri配置的是将请求路由到哪里，本案例全部路由到http://httpbin.org:80/get。
 
-#predicates\uFF1A After=2017-01-20T17:42:47.789-07:00[America/Denver]
-#\u4F1A\u88AB\u89E3\u6790\u6210PredicateDefinition\u5BF9\u8C61 \uFF08name =After \uFF0Cargs= 2017-01-20T17:42:47.789-07:00[America/Denver]\uFF09\u3002
-#\u5728\u8FD9\u91CC\u9700\u8981\u6CE8\u610F\u7684\u662Fpredicates\u7684After\u8FD9\u4E2A\u914D\u7F6E\uFF0C\u9075\u5FAA\u7684\u5951\u7EA6\u5927\u4E8E\u914D\u7F6E\u7684\u601D\u60F3\uFF0C\u5B83\u5B9E\u9645\u88ABAfterRoutePredicateFactory\u8FD9\u4E2A\u7C7B\u6240\u5904\u7406\uFF0C
-#\u8FD9\u4E2AAfter\u5C31\u662F\u6307\u5B9A\u4E86\u5B83\u7684Gateway web handler\u7C7B\u4E3AAfterRoutePredicateFactory\uFF0C\u540C\u7406\uFF0C\u5176\u4ED6\u7C7B\u578B\u7684predicate\u4E5F\u9075\u5FAA\u8FD9\u4E2A\u89C4\u5219
+#predicates： After=2017-01-20T17:42:47.789-07:00[America/Denver]
+#会被解析成PredicateDefinition对象 （name =After ，args= 2017-01-20T17:42:47.789-07:00[America/Denver]）。
+#在这里需要注意的是predicates的After这个配置，遵循的契约大于配置的思想，它实际被AfterRoutePredicateFactory这个类所处理，
+
+#这个After就是指定了它的Gateway web handler类为AfterRoutePredicateFactory，同理，其他类型的predicate也遵循这个规则
 
 #Header Route Predicate Factory
-#Header Route Predicate Factory\u9700\u89812\u4E2A\u53C2\u6570\uFF0C\u4E00\u4E2A\u662Fheader\u540D\uFF0C\u53E6\u5916\u4E00\u4E2Aheader\u503C\uFF0C\u8BE5\u503C\u53EF\u4EE5\u662F\u4E00\u4E2A\u6B63\u5219\u8868\u8FBE\u5F0F\u3002
-#\u5F53\u6B64\u65AD\u8A00\u5339\u914D\u4E86\u8BF7\u6C42\u7684header\u540D\u548C\u503C\u65F6\uFF0C\u65AD\u8A00\u901A\u8FC7\uFF0C\u8FDB\u5165\u5230router\u7684\u89C4\u5219\u4E2D\u53BB\u3002
+#Header Route Predicate Factory需要2个参数，一个是header名，另外一个header值，该值可以是一个正则表达式。
+#当此断言匹配了请求的header名和值时，断言通过，进入到router的规则中去。
 ---
 spring:
   cloud:
@@ -45,12 +44,12 @@ spring:
         predicates:
         - Header=X-Request-Id, \d+
   profiles: header_route
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u4E2D\uFF0C\u5F53\u8BF7\u6C42\u7684Header\u4E2D\u6709X-Request-Id\u7684header\u540D\uFF0C\u4E14header\u503C\u4E3A\u6570\u5B57\u65F6\uFF0C\u8BF7\u6C42\u4F1A\u88AB\u8DEF\u7531\u5230\u914D\u7F6E\u7684 uri.
+#在上面的配置中，当请求的Header中有X-Request-Id的header名，且header值为数字时，请求会被路由到配置的 uri.
 
 #Cookie Route Predicate Factory
 
-#Cookie Route Predicate Factory\u9700\u89812\u4E2A\u53C2\u6570\uFF0C\u4E00\u4E2A\u65F6cookie\u540D\u5B57\uFF0C\u53E6\u4E00\u4E2A\u65F6\u503C\uFF0C\u53EF\u4EE5\u4E3A\u6B63\u5219\u8868\u8FBE\u5F0F\u3002
-#\u5B83\u7528\u4E8E\u5339\u914D\u8BF7\u6C42\u4E2D\uFF0C\u5E26\u6709\u8BE5\u540D\u79F0\u7684cookie\u548Ccookie\u5339\u914D\u6B63\u5219\u8868\u8FBE\u5F0F\u7684\u8BF7\u6C42\u3002
+#Cookie Route Predicate Factory需要2个参数，一个时cookie名字，另一个时值，可以为正则表达式。
+#它用于匹配请求中，带有该名称的cookie和cookie匹配正则表达式的请求。
 ---
 spring:
   cloud:
@@ -61,12 +60,12 @@ spring:
         predicates:
         - Cookie=name, forezp
   profiles: cookie_route
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u4E2D\uFF0C\u8BF7\u6C42\u5E26\u6709cookie\u540D\u4E3A name, cookie\u503C\u4E3Aforezp \u7684\u8BF7\u6C42\u5C06\u90FD\u4F1A\u8F6C\u53D1\u5230uri\u4E3A http://httpbin.org:80/get\u7684\u5730\u5740\u4E0A\u3002
-#\u4F7F\u7528curl\u547D\u4EE4\u8FDB\u884C\u8BF7\u6C42\uFF0C\u5728\u8BF7\u6C42\u4E2D\u5E26\u4E0A cookie\uFF0C\u4F1A\u8FD4\u56DE\u6B63\u786E\u7684\u7ED3\u679C\uFF0C\u5426\u5219\uFF0C\u8BF7\u6C42\u62A5404\u9519\u8BEF\u3002
+#在上面的配置中，请求带有cookie名为 name, cookie值为forezp 的请求将都会转发到uri为 http://httpbin.org:80/get的地址上。
+#使用curl命令进行请求，在请求中带上 cookie，会返回正确的结果，否则，请求报404错误。
 
 #Host Route Predicate Factory
-#Host Route Predicate Factory\u9700\u8981\u4E00\u4E2A\u53C2\u6570\u5373hostname\uFF0C\u5B83\u53EF\u4EE5\u4F7F\u7528. * \u7B49\u53BB\u5339\u914Dhost\u3002\u8FD9\u4E2A\u53C2\u6570\u4F1A\u5339\u914D\u8BF7\u6C42\u5934\u4E2D\u7684host\u7684\u503C\uFF0C
-#\u4E00\u81F4\uFF0C\u5219\u8BF7\u6C42\u6B63\u786E\u8F6C\u53D1\u3002
+#Host Route Predicate Factory需要一个参数即hostname，它可以使用. * 等去匹配host。这个参数会匹配请求头中的host的值，
+#一致，则请求正确转发。
 ---
 spring:
   cloud:
@@ -77,11 +76,11 @@ spring:
         predicates:
         - Host=**.fangzhipeng.com
   profiles: host_route
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u4E2D\uFF0C\u8BF7\u6C42\u5934\u4E2D\u542B\u6709Host\u4E3Afangzhipeng.com\u7684\u8BF7\u6C42\u5C06\u4F1A\u88AB\u8DEF\u7531\u8F6C\u53D1\u8F6C\u53D1\u5230\u914D\u7F6E\u7684uri\u3002
-#\u542F\u52A8\u5DE5\u7A0B\uFF0C\u6267\u884C\u4EE5\u4E0B\u7684curl\u547D\u4EE4\uFF0C\u8BF7\u6C42\u4F1A\u8FD4\u56DE\u6B63\u786E\u7684\u8BF7\u6C42\u7ED3\u679C\uFF1A
+#在上面的配置中，请求头中含有Host为fangzhipeng.com的请求将会被路由转发转发到配置的uri。
+#启动工程，执行以下的curl命令，请求会返回正确的请求结果：
 
 #Method Route Predicate Factory
-#Method Route Predicate Factory \u9700\u8981\u4E00\u4E2A\u53C2\u6570\uFF0C\u5373\u8BF7\u6C42\u7684\u7C7B\u578B\u3002\u6BD4\u5982GET\u7C7B\u578B\u7684\u8BF7\u6C42\u90FD\u8F6C\u53D1\u5230\u6B64\u8DEF\u7531\u3002\u5728\u5DE5\u7A0B\u7684\u914D\u7F6E\u6587\u4EF6\u52A0\u4E0A\u4EE5\u4E0B\u7684\u914D\u7F6E\uFF1A
+#Method Route Predicate Factory 需要一个参数，即请求的类型。比如GET类型的请求都转发到此路由。在工程的配置文件加上以下的配置：
 ---
 spring:
   cloud:
@@ -92,10 +91,10 @@ spring:
         predicates:
         - Method=GET
   profiles: method_route
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u4E2D\uFF0C\u6240\u6709\u7684GET\u7C7B\u578B\u7684\u8BF7\u6C42\u90FD\u4F1A\u8DEF\u7531\u8F6C\u53D1\u5230\u914D\u7F6E\u7684uri\u3002\u4F7F\u7528 curl\u547D\u4EE4\u6A21\u62DF get\u7C7B\u578B\u7684\u8BF7\u6C42\uFF0C\u4F1A\u5F97\u5230\u6B63\u786E\u7684\u8FD4\u56DE\u7ED3\u679C\u3002
+#在上面的配置中，所有的GET类型的请求都会路由转发到配置的uri。使用 curl命令模拟 get类型的请求，会得到正确的返回结果。
 
 #Path Route Predicate Factory
-#Path Route Predicate Factory \u9700\u8981\u4E00\u4E2A\u53C2\u6570: \u4E00\u4E2Aspel\u8868\u8FBE\u5F0F\uFF0C\u5E94\u7528\u5339\u914D\u8DEF\u5F84\u3002
+#Path Route Predicate Factory 需要一个参数: 一个spel表达式，应用匹配路径。
 ---
 spring:
   cloud:
@@ -106,10 +105,10 @@ spring:
         predicates:
         - Path=/foo/{segment}
   profiles: path_route
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u4E2D\uFF0C\u6240\u6709\u7684\u8BF7\u6C42\u8DEF\u5F84\u6EE1\u8DB3/foo/{segment}\u7684\u8BF7\u6C42\u5C06\u4F1A\u5339\u914D\u5E76\u88AB\u8DEF\u7531\uFF0C\u6BD4\u5982/foo/1 \u3001/foo/bar\u7684\u8BF7\u6C42\uFF0C\u5C06\u4F1A\u547D\u4E2D\u5339\u914D\uFF0C\u5E76\u6210\u529F\u8F6C\u53D1\u3002
+#在上面的配置中，所有的请求路径满足/foo/{segment}的请求将会匹配并被路由，比如/foo/1 、/foo/bar的请求，将会命中匹配，并成功转发。
 
 #Query Route Predicate Factory
-#Query Route Predicate Factory \u9700\u89812\u4E2A\u53C2\u6570:\u4E00\u4E2A\u53C2\u6570\u540D\u548C\u4E00\u4E2A\u53C2\u6570\u503C\u7684\u6B63\u5219\u8868\u8FBE\u5F0F\u3002\u5728\u5DE5\u7A0B\u7684\u914D\u7F6E\u6587\u4EF6application.yml\u505A\u4EE5\u4E0B\u7684\u914D\u7F6E\uFF1A
+#Query Route Predicate Factory 需要2个参数:一个参数名和一个参数值的正则表达式。在工程的配置文件application.yml做以下的配置：
  ---
  spring:
    cloud:
@@ -120,10 +119,10 @@ spring:
          predicates:
          - Query=foo, ba.
    profiles: query_route
-#\u5728\u4E0A\u9762\u7684\u914D\u7F6E\u6587\u4EF6\u4E2D\uFF0C\u914D\u7F6E\u4E86\u8BF7\u6C42\u4E2D\u542B\u6709\u53C2\u6570foo\uFF0C\u5E76\u4E14foo\u7684\u503C\u5339\u914Dba.\uFF0C\u5219\u8BF7\u6C42\u547D\u4E2D\u8DEF\u7531\uFF0C\u6BD4\u5982\u4E00\u4E2A\u8BF7\u6C42\u4E2D\u542B\u6709\u53C2\u6570\u540D\u4E3Afoo\uFF0C\u503C\u7684\u4E3Abar\uFF0C\u80FD\u591F\u88AB\u6B63\u786E\u8DEF\u7531\u8F6C\u53D1\u3002
-#Query Route Predicate Factory\u4E5F\u53EF\u4EE5\u53EA\u586B\u4E00\u4E2A\u53C2\u6570\uFF0C\u586B\u4E00\u4E2A\u53C2\u6570\u65F6\uFF0C\u5219\u53EA\u5339\u914D\u53C2\u6570\u540D\uFF0C\u5373\u8BF7\u6C42\u7684\u53C2\u6570\u4E2D\u542B\u6709\u914D\u7F6E\u7684\u53C2\u6570\u540D\uFF0C\u5219\u547D\u4E2D\u8DEF\u7531\u3002
+#在上面的配置文件中，配置了请求中含有参数foo，并且foo的值匹配ba.，则请求命中路由，比如一个请求中含有参数名为foo，值的为bar，能够被正确路由转发。
+#Query Route Predicate Factory也可以只填一个参数，填一个参数时，则只匹配参数名，即请求的参数中含有配置的参数名，则命中路由。
 
-#\u6BD4\u5982\u4EE5\u4E0B\u7684\u914D\u7F6E\u4E2D\uFF0C\u914D\u7F6E\u4E86\u8BF7\u6C42\u53C2\u6570\u4E2D\u542B\u6709\u53C2\u6570\u540D\u4E3Afoo \u7684\u53C2\u6570\u5C06\u4F1A\u88AB\u8BF7\u6C42\u8F6C\u53D1\u5230uri\u4E3Ahttp://httpbin.org:80/get\u3002
+#比如以下的配置中，配置了请求参数中含有参数名为foo 的参数将会被请求转发到uri为http://httpbin.org:80/get。
 ---
 spring:
   cloud:
@@ -134,4 +133,3 @@ spring:
         predicates:
         - Query=foo
   profiles: query_route
-
