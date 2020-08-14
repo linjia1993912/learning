@@ -1,7 +1,7 @@
-<<<<<<< HEAD
+#项目简介
+本工程为学习使用
 
-
-##模块说明
+#模块说明
 springboot-demo为学习SpringBoot以及Java基础代码  
 springboot-shiro-jwt为学习练习SpringBoot集成Shiro、JWT的demo  
 spring-security为学习练习Spring Security安全框架项目  
@@ -9,7 +9,7 @@ springboot-mybatis为学习练习springboot整合mybatis
 springboot-redis为学习redis相关,包括redis实现分布式锁  
 springboot-redisson-distributed-core、springboot-redisson-distributed-web-test为redisson实现分布式锁项目  
 
-##整合SpringCloud
+#整合SpringCloud
 eureka-server 服务提供者
 
 eureka-client 服务消费者
@@ -18,13 +18,11 @@ eureka-client 服务消费者
 Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign
 
 service-ribbon:是一个负载均衡客户端，可以很好的控制htt和tcp的一些行为,Feign默认集成了ribbon
-
 ribbon使用hystrix(断路器)
 
 service-feign:Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。
 它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。
 Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果
-
 Feign使用hystrix(断路器)
 
 service-zuul用于学习应用zuul，实现路由功能和服务过滤功能
@@ -36,7 +34,10 @@ config-client 配置中心客户端
 
 * 代码中实现了高可用分布式配置中心
 
-sc-f-gateway-first-sight 使用SpringCloud Gateway网关
+sc-f-gateway-first-sight 初识SpringCloud Gateway网关
+
+sc-f-gateway-predicate 使用Gateway Predicate 断言,匹配分发到路由
+
 
 ###注意事项 
 [版本问题]
