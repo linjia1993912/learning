@@ -13,6 +13,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	// 实现完KeyResolver之后，需要将这个类的Bean注册到Ioc容器中。
 	@Bean
 	public HostAddrKeyResolver hostAddrKeyResolver() {
 		return new HostAddrKeyResolver();
