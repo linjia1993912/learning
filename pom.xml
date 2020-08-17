@@ -37,6 +37,7 @@
         <module>springboot-redisson-distributed-web-test</module>
         <module>service-feign</module>
         <module>sc-f-gateway-filter</module>
+        <module>sc-f-gateway-limiter</module>
     </modules>
 
     <dependencies>
