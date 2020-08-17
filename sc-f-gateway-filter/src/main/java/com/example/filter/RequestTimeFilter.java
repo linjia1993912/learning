@@ -85,4 +85,8 @@ public class RequestTimeFilter implements GatewayFilter,Ordered {
         // @formatter:on
     }
 
+    public static void main(String[] args) {
+
+    }
+
 }
