@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   profiles:
-    active: rewritepath_route
+    active: elapse_route
 
 ---
 spring:
@@ -40,6 +40,22 @@ spring:
 #此工厂将/foo/(?.*)重写为{segment}，然后转发到https://blog.csdn.net。比如在网页上请求localhost:8081/foo/forezp，
 #此时会将请求转发到https://blog.csdn.net/forezp的页面，比如在网页上请求localhost:8081/foo/forezp/1，页面显示404，
 #就是因为不存在https://blog.csdn.net/forezp/1这个页面。
+
+
+#自定义过滤器工厂
+---
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: elapse_route
+        uri: http://httpbin.org:80/get
+        filters:
+        - RequestTime=false
+        predicates:
+        - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+  profiles: elapse_route
+
 
 
 

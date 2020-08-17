@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * @Description: Gateway自定义过滤器
+ * 针对单个路由的
  * pring Cloud Gateway内置了19种强大的过滤器工厂，能够满足很多场景的需求，那么能不能自定义自己的过滤器呢，当然是可以的。
  * 在spring Cloud Gateway中，过滤器需要实现GatewayFilter和Ordered2个接口
  * @Author LinJia
@@ -83,10 +84,6 @@ public class RequestTimeFilter implements GatewayFilter,Ordered {
                 )
                 .build();
         // @formatter:on
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }
