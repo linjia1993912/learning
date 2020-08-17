@@ -38,6 +38,7 @@
         <module>service-feign</module>
         <module>sc-f-gateway-filter</module>
         <module>sc-f-gateway-limiter</module>
+        <module>service-gateway</module>
     </modules>
 
     <dependencies>
