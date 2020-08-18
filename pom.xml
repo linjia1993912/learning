@@ -39,6 +39,7 @@
         <module>sc-f-gateway-filter</module>
         <module>sc-f-gateway-limiter</module>
         <module>service-gateway</module>
+        <module>spring-learning</module>
     </modules>
 
     <dependencies>

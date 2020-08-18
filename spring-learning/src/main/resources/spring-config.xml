@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--spring最基础的注入属性值-->
+    <!--我们可以将这个bean理解为我们的javaBean，其中两个property标签即表示给User类中的name和age属性赋值！-->
+    <bean id="user" class="com.example.entity.User">
+        <property name="name" value="linjia"></property>
+        <property name="age" value="18"></property>
+    </bean>
+</beans>
