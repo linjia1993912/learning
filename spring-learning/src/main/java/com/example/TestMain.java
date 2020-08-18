@@ -1,6 +1,8 @@
 package com.example;
 
 import com.example.entity.User;
+import com.example.service.UserService;
+import com.example.spring.context.SelfPathXmlApplicationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,6 +21,20 @@ public class TestMain {
         User user = applicationContext.getBean("user", User.class);
 
         System.out.println(user.toString());
+
+        //测试模拟Ioc
+        try{
+            SelfPathXmlApplicationContext selfPathXmlApplicationContext = new SelfPathXmlApplicationContext("com.example.service");
+            UserService userService = (UserService) selfPathXmlApplicationContext.getBean("userServiceImpl");
+            userService.test();
+            System.out.println(userService);
+            //看看是否是同一个实例对象
+            UserService userService1 = (UserService) selfPathXmlApplicationContext.getBean("userServiceImpl");
+            System.out.println(userService1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

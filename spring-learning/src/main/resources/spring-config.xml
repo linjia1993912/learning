@@ -9,4 +9,19 @@
         <property name="name" value="linjia"></property>
         <property name="age" value="18"></property>
     </bean>
+
+    <!--依赖注入的几种方式-->
+    <!--通过构造方法注入-->
+    <bean id="userDao" class="com.example.dao.UserDao"></bean>
+
+    <!--<bean id="userDaoimpl" class="com.example.dao.UserDaoImpl">
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>-->
+
+    <!--通过setter方法注入-->
+    <bean id="userDaoimpl" class="com.example.dao.UserDaoImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+
 </beans>
