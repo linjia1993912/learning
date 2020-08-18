@@ -34,8 +34,9 @@ public class SelfPathXmlApplicationContext {
      **/
     public SelfPathXmlApplicationContext(String packageName) throws Exception {
         this.packageName = packageName;
+        //初始化IOC容器
         beans = new ConcurrentHashMap<>();
-        //装载bean
+        //装载bean、创建对象
         initBeans();
         initEntryField();
     }
