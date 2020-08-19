@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 模拟spring的bean容器类
  * 这段代码的作用其实就是模拟在spring启动加载的时候,通过这个类去初始化一个bean的容器管理类，所有的bean的信息解析和保存都会在这个类里面
  * 相当于ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+ *
  * @Author LinJia
  * @Date 2020/8/18
  **/
@@ -23,8 +24,8 @@ public class SelfPathXmlApplicationContext {
 
     private String packageName;
 
-    //放置创建好的bean容器
-    private Map<String,Object> beans = null;
+    //单例缓存，存储已经实例化完成的单例
+    private Map<String,Object> beanCache = null;
 
     /**
      * @Description: 构造
@@ -37,10 +38,10 @@ public class SelfPathXmlApplicationContext {
         this.packageName = packageName;
         //初始化IOC容器
         //Spring源码里容量是256
-        beans = new ConcurrentHashMap<>(256);
+        beanCache = new ConcurrentHashMap<>(256);
         //装载bean、实例化对象
         initBeans();
-        //注入
+        //注入对象
         initEntryField();
     }
 
@@ -80,11 +81,11 @@ public class SelfPathXmlApplicationContext {
                 //转小写，遵循类命名规范
                 String beanId = toLowerCaseFirstOne(className);
                 Object newInstance = newInstance(classInfo);
-                beans.put(beanId, newInstance);
+                beanCache.put(beanId, newInstance);
             }
 
         }
-        return beans;
+        return beanCache;
     }
 
     /**
@@ -96,7 +97,7 @@ public class SelfPathXmlApplicationContext {
      **/
     private void initEntryField() throws Exception {
         // 1.遍历容器中所有的bean
-        for (Map.Entry<String,Object> map :beans.entrySet()){
+        for (Map.Entry<String,Object> map :beanCache.entrySet()){
             // 2.判断属性上面是否有加注解
             Object object = map.getValue();
             attriAssign(object);
@@ -157,7 +158,7 @@ public class SelfPathXmlApplicationContext {
             throw new Exception("beanId参数不能为空");
         }
         // 1.从spring容器获取bean
-        return beans.get(beanId);
+        return beanCache.get(beanId);
     }
 
     public static String toLowerCaseFirstOne(String s) {
