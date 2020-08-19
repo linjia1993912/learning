@@ -30,8 +30,13 @@ public class ThreadPoolExecutorConfig {
 
         public static void main(String[] args) {
 
+            //Executors创建返回ThreadPoolExecutor对象的方法共有三种：
+            //Executors#newCachedThreadPool => 创建可缓存的线程池
+            //Executors#newSingleThreadExecutor => 创建单线程的线程池
+            //Executors#newFixedThreadPool => 创建固定长度的线程池
+
             /**
-             * 固定线程数
+             * 创建固定长度的线程池
              *
              * 核心线程数和最大线程数是一样的，所以称之为固定线程数。
              *
@@ -50,7 +55,7 @@ public class ThreadPoolExecutorConfig {
 
 
             /**
-             * 单个线程
+             * 创建单线程的线程池
              *
              * 核心线程数和最大线程数是1，内部默认的，不可更改，所以称之为单线程数的线程池,类似于Executors.newFixedThreadPool(1);
              * 其他参数配置默认为：永不超时（0ms），无界队列（LinkedBlockingQueue）、
@@ -70,7 +75,7 @@ public class ThreadPoolExecutorConfig {
 
 
             /**
-             * 带缓存的线程池
+             * 创建可缓存的线程池
              *
              * 他的功能是来个任务我就开辟个线程去处理，不会进入队列，SynchronousQueue队列也不带
              * 存储元素的功能。那这意味着来一亿个请求就会开辟一亿个线程去处理，keepAliveTime为60S，
