@@ -2,6 +2,7 @@ package learning.basis.proxy.dynamicProxy;
 
 /**
  * @Description:被代理对象
+ * 目标对象必须要实现接口
  * @Author LinJia
  * @Date 2020/8/26
  **/
