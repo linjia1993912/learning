@@ -1,11 +1,16 @@
-package learning.basis.proxy;
+package learning.basis.proxy.dynamicProxy;
+
+import learning.basis.proxy.MonitorUtil;
+import learning.basis.proxy.Person;
+import learning.basis.proxy.Student;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * @Description:动态代理 创建StuInvocationHandler类，实现InvocationHandler接口，这个类中持有一个被代理对象的实例target。
+ * @Description:动态代理 实现方式一
+ * 创建StuInvocationHandler类，实现InvocationHandler接口，这个类中持有一个被代理对象的实例target。
  * InvocationHandler中有一个invoke方法，所有执行代理对象的方法都会被替换成执行invoke方法。
  * 再再invoke方法中执行被代理对象target的相应方法。
  * 当然，在代理过程中，我们在真正执行被代理对象的方法前加入自己其他处理。这也是Spring中的AOP实现的主要原理，
