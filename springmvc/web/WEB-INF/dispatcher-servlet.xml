@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 配置注解驱动 开启注解驱动，这样我们就能用注解 -->
+    <mvc:annotation-driven/>
+
+    <!--配置包扫描器 这个是定义扫描器，会自动扫描包下面的所有有@Controller注解的类-->
+    <context:component-scan base-package="com.linjia.controller"/>
+
+    <!-- 视图解析器 定义视图解析器，其中包括前缀和后缀，这样到时候controller返回字符串的时候，
+        就会去/WEB-INF/views/下面找对应字符串名字的jsp文件 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀-->
+        <!--    /WEB-INF/page/意为页面的路径，.jsp为页面格式-->
+        <property name="prefix" value="/WEB-INF/page/"/>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
