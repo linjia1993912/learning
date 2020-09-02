@@ -1,4 +1,4 @@
-package com.learning.mapper;
+package com.learning.common;
 
 import java.util.List;
 

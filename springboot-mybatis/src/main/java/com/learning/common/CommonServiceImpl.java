@@ -1,18 +1,24 @@
-package com.learning.service.impl;
+/*
+package com.learning.common;
 
-import com.learning.mapper.CommonMapper;
 
 import java.util.List;
 
+*/
 /**
  * @Description:封装一个公共mapper实现类
  * 可以实现以下基础的CRUD
  * @Author LinJia
  * @Date 2020/7/31
- **/
+ **//*
+
 public abstract class CommonServiceImpl<T> implements CommonMapper<T> {
 
     public abstract CommonMapper<T> getMapper();
+
+    public T getById(Integer id) {
+        return getMapper().selectByPrimaryKey(id);
+    }
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -54,3 +60,4 @@ public abstract class CommonServiceImpl<T> implements CommonMapper<T> {
         return null;
     }
 }
+*/
