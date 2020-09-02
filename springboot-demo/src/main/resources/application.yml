@@ -6,3 +6,39 @@ isAuthorToken: false
 
 #配置线程数
 executorPoolSize: 1
+
+#获取配置文件的值
+#my:
+# name: forezp
+# age: 12
+
+#将配置文件的属性赋给实体类
+my:
+  name: forezp
+  age: 12
+  number:  ${random.int}
+  uuid : ${random.uuid}
+  max: ${random.int(10)}
+  value: ${random.value}
+  greeting: hi,i'm  ${my.name}
+
+
+#使用不同环境的配置文件
+#spring:
+#  profiles:
+#    active: dev
+
+#配置mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mytest?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: 123456
+
+#JPA
+  jpa:
+    hibernate:
+      ddl-auto: update  # 第一次简表create  后面用update
+    show-sql: true
+#注意，如果通过jpa在数据库中建表，将jpa.hibernate,ddl-auto改为create，建完表之后，要改为update,要不然每次重启工程会删除表并新建
