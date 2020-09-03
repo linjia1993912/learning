@@ -1,21 +1,27 @@
 package com.learning.entity;
 
-/**
- * @Description:
- * @Author LinJia
- * @Date 2020/5/20
- **/
 public class UserEntity {
+    private Integer id;
 
-    private int id;
     private String userName;
+
     private String address;
 
-    public int getId() {
+    public UserEntity(Integer id, String userName, String address) {
+        this.id = id;
+        this.userName = userName;
+        this.address = address;
+    }
+
+    public UserEntity() {
+        super();
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,7 +30,7 @@ public class UserEntity {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getAddress() {
@@ -32,6 +38,6 @@ public class UserEntity {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = address == null ? null : address.trim();
     }
 }

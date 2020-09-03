@@ -40,7 +40,6 @@
             <version>1.3.1</version>
         </dependency>
 
-
         <!-- mybatis plus 相关依赖 -->
         <!--<dependency>
             <groupId>com.baomidou</groupId>
@@ -58,4 +57,32 @@
         </dependency>-->
 
     </dependencies>
+
+    <!--使用mybatis generator工具自动生成xml-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <configuration>
+                    <!-- 在控制台打印执行日志 -->
+                    <verbose>true</verbose>
+                    <!-- 重复生成时会覆盖之前的文件-->
+                    <overwrite>true</overwrite>
+                    <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+                </configuration>
+                <!-- 数据库连接选择8.0以上的，因为用的mysql8.0-->
+                <!--mysql连接一定添加在plugins中-->
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.11</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

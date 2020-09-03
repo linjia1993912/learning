@@ -1,7 +1,7 @@
 package com.learning.service.impl;
 
 import com.learning.entity.UserEntity;
-import com.learning.mapper.UserMapper;
+import com.learning.mapper.UserEntityMapper;
 import com.learning.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 public class UserService implements IUserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserEntityMapper userMapper;
 
     @Override
     public List<UserEntity> getUserAll() {
