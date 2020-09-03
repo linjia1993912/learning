@@ -42,3 +42,9 @@ spring:
       ddl-auto: update  # 第一次简表create  后面用update
     show-sql: true
 #注意，如果通过jpa在数据库中建表，将jpa.hibernate,ddl-auto改为create，建完表之后，要改为update,要不然每次重启工程会删除表并新建
+
+#设置上传文件大小限制
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
