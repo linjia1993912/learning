@@ -2,6 +2,7 @@ package learning;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @Description:ReadingListApplication为应用程序的启动引导类(bootstrap class)，也是主要的Spring配置类
@@ -18,6 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @return
  **/
 @SpringBootApplication  //开启组件扫描和自动配置
+@EnableScheduling //开启定时任务调度,如需使用定时任务则需要在启动类加此注解
 public class ReadingListApplication {
 
 	public static void main(String[] args) {
