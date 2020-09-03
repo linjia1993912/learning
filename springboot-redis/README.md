@@ -1,6 +1,8 @@
 
 ##项目概述
-redis实现分布式锁
+SpringBoot整合redis实现分布式锁
+
+redis实现消息队列
 
 ##项目整体结构
 
