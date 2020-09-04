@@ -17,11 +17,9 @@ public class FDD {
         System.out.println("静态代码块");
     }
 
-
     static class FDDloaderTest {
 
         public static void main(String[] args) {
-
             try {
                 ClassLoader loader = FDD.class.getClassLoader();
                 System.out.println(loader);
@@ -38,11 +36,8 @@ public class FDD {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
-
 
     //自定义类加载器
     //（1）创建一个类继承ClassLoader抽象类
