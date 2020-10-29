@@ -28,8 +28,6 @@ springboot-demo
                            ---aspect
                            |# 测试controller
                            ---controller
-                           |# 验证token拦截器
-                           ---interceptor
                            |# 学习《SpringBoot》实战代码
                            ---readinglist
                            |# 学习反射代码
@@ -80,5 +78,9 @@ springboot-demo
                                   ---cas
                            |# JVM相关示例代码
                            ---jvm
+                           |# 接口安全性
+                           ---interface_security
+                                   |# 验证token拦截器
+                                   ---interceptor
                          
 ```
