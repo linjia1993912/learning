@@ -1,5 +1,6 @@
 package learning.interface_security.controller;
 
+import learning.annotation.InterfaceSecurity;
 import org.apache.commons.collections4.map.LRUMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -94,7 +95,6 @@ public class RepeatSubmitController {
 
 
     //最终版——封装
-
     @RequestMapping("/add3")
     public String addUser3(String id) {
         // 非空判断(忽略)...
@@ -106,6 +106,14 @@ public class RepeatSubmitController {
         // 业务代码...
         System.out.println("添加用户ID:" + id);
         return "执行成功！";
+    }
+
+
+    //自定义注解形式
+    @InterfaceSecurity
+    @RequestMapping("/add4")
+    public String addUser4(String id) {
+        return "添加成功";
     }
 
 

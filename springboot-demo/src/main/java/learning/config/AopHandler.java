@@ -1,7 +1,9 @@
 package learning.config;
 
+import learning.annotation.InterfaceSecurity;
 import learning.annotation.Log;
 import learning.aspect.AspectApiImpl;
+import learning.aspect.InterfaceSecurityAspect;
 import learning.aspect.LogAspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,7 +29,7 @@ public class AopHandler {
 
 
     // 定义切点Pointcut
-    @Pointcut("execution(* learning.controller..*.*(..))")
+    @Pointcut("execution(* learning..*.*(..))")
     public void excudeService() {
     }
 
@@ -49,6 +51,11 @@ public class AopHandler {
         if(method.isAnnotationPresent(Log.class)){
             return new LogAspect(aspectApi).doHandlerAspect(pjp,method);
         }
+        //幂等性验证，防止数据重复提交
+        if(method.isAnnotationPresent(InterfaceSecurity.class)){
+             return new InterfaceSecurityAspect(aspectApi).doHandlerAspect(pjp,method);
+        }
+
         return  pjp.proceed(pjp.getArgs());
     }
 

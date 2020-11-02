@@ -1,4 +1,4 @@
-package learning.controller;
+package learning.interface_security.controller;
 
 import learning.annotation.Log;
 import org.springframework.web.bind.annotation.PostMapping;
