@@ -1,5 +1,3 @@
-server:
-  port: 9090
 
 spring:
   datasource:
@@ -8,11 +6,11 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-#连接Elasitcsearch的配置如下
-es:
-  host: localhost
-  port: 9200
-  scheme: http
+  #连接Elasitcsearch的配置如下
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: localhost:9300  #此处需注意：端口是9300,9200是客户端访问的
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml

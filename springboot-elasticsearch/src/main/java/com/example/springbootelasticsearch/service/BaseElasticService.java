@@ -1,6 +1,8 @@
+/*
 package com.example.springbootelasticsearch.service;
 
 import com.alibaba.fastjson.JSON;
+import com.example.springbootelasticsearch.entity.ElasticEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -27,11 +29,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+*/
 /**
  * @Description: 核心操作类
  * @Author LinJia
  * @Date 2020/11/10
- **/
+ **//*
+
 @Slf4j
 @Component
 public class BaseElasticService {
@@ -39,13 +43,15 @@ public class BaseElasticService {
     @Autowired
     RestHighLevelClient restHighLevelClient;
 
-    /**
+    */
+/**
      * @Description:创建索引
      * @Author LinJia
      * @Date 2020/11/10 16:11
      * @Param [idxName 索引名称, idxSQL 索引描述]
      * @return void
-     **/
+     **//*
+
     public void createIndex(String idxName,String idxSQL){
         try {
             if (!this.indexExist(idxName)) {
@@ -65,13 +71,15 @@ public class BaseElasticService {
         }
     }
 
-    /**
+    */
+/**
      * @Description:断某个index是否存在
      * @Author LinJia
      * @Date 2020/11/10 16:55
      * @Param [idxName]
      * @return boolean
-     **/
+     **//*
+
     public boolean indexExist(String idxName) throws Exception {
         GetIndexRequest request = new GetIndexRequest(idxName);
         request.local(false);
@@ -81,36 +89,42 @@ public class BaseElasticService {
         return restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);
     }
 
-    /**
+    */
+/**
      * @Description:断某个index是否存在
      * @Author LinJia
      * @Date 2020/11/10 16:56
      * @Param [idxName]
      * @return boolean
-     **/
+     **//*
+
     public boolean isExistsIndex(String idxName) throws Exception {
         return restHighLevelClient.indices().exists(new GetIndexRequest(idxName),RequestOptions.DEFAULT);
     }
 
-    /**
+    */
+/**
      * @Description:设置分片
      * @Author LinJia
      * @Date 2020/11/10 16:54
      * @Param [request]
      * @return void
-     **/
+     **//*
+
     public void buildSetting(CreateIndexRequest request){
         request.settings(Settings.builder().put("index.number_of_shards",3)
                 .put("index.number_of_replicas",2));
     }
 
-    /**
+    */
+/**
      * @Description:插入或更新
      * @Author LinJia
      * @Date 2020/11/10 16:56
      * @Param [idxName, entity]
      * @return void
-     **/
+     **//*
+
     public void insertOrUpdateOne(String idxName, ElasticEntity entity) {
         IndexRequest request = new IndexRequest(idxName);
         log.error("Data : id={},entity={}",entity.getId(), JSON.toJSONString(entity.getData()));
@@ -123,13 +137,15 @@ public class BaseElasticService {
         }
     }
 
-    /**
+    */
+/**
      * @Description:批量插入数据
      * @Author LinJia
      * @Date 2020/11/10 16:57 
      * @Param [idxName, list]
      * @return void
-     **/
+     **//*
+
     public void insertBatch(String idxName, List<ElasticEntity> list) {
         BulkRequest request = new BulkRequest();
         list.forEach(item -> request.add(new IndexRequest(idxName).id(item.getId())
@@ -141,14 +157,17 @@ public class BaseElasticService {
         }
     }
 
-    /**
+    */
+/**
      * @Description:批量删除
      * @Author LinJia
      * @Date 2020/11/10 16:57 
      * @Param [idxName, idList]
      * @return void
-     **/
-    public <T> void deleteBatch(String idxName, Collection<T> idList) {
+     **//*
+
+    */
+/*public <T> void deleteBatch(String idxName, Collection<T> idList) {
         BulkRequest request = new BulkRequest();
         idList.forEach(item -> request.add(new DeleteRequest(idxName, item.toString())));
         try {
@@ -156,15 +175,18 @@ public class BaseElasticService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*//*
 
-    /**
+
+    */
+/**
      * @Description:查询
      * @Author LinJia
      * @Date 2020/11/10 16:58 
      * @Param [idxName, builder, c]
      * @return java.util.List<T>
-     **/
+     **//*
+
     public <T> List<T> search(String idxName, SearchSourceBuilder builder, Class<T> c) {
         SearchRequest request = new SearchRequest(idxName);
         request.source(builder);
@@ -181,13 +203,15 @@ public class BaseElasticService {
         }
     }
 
-    /**
+    */
+/**
      * @Description:删除index
      * @Author LinJia
      * @Date 2020/11/10 16:58
      * @Param [idxName]
      * @return void
-     **/
+     **//*
+
     public void deleteIndex(String idxName) {
         try {
             if (!this.indexExist(idxName)) {
@@ -214,3 +238,4 @@ public class BaseElasticService {
     }
 
 }
+*/
