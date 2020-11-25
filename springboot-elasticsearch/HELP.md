@@ -1,5 +1,8 @@
 Spring Boot 2.x 集成 Elasticsearch
 
+###版本
+Elasticsearch-6.8.5
+
 ###步骤一
 1.启动Elasticsearch
 
