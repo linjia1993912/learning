@@ -6,11 +6,11 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  #Á¬½ÓElasitcsearchµÄÅäÖÃÈçÏÂ
+  #è¿æ¥Elasitcsearchçš„é…ç½®å¦‚ä¸‹
   data:
     elasticsearch:
       cluster-name: elasticsearch
-      cluster-nodes: localhost:9300  #´Ë´¦Ğè×¢Òâ£º¶Ë¿ÚÊÇ9300,9200ÊÇ¿Í»§¶Ë·ÃÎÊµÄ
+      cluster-nodes: localhost:9300  #æ­¤å¤„éœ€æ³¨æ„ï¼šç«¯å£æ˜¯9300,9200æ˜¯å®¢æˆ·ç«¯è®¿é—®çš„
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
