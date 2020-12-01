@@ -34,6 +34,7 @@ public class IDataServiceImpl implements DataService {
 
     /**
      * @Description:抓取京东手机数据
+     * i=页数
      * @Author LinJia
      * @Date 2020/11/27 4:48 下午
      * @Param []
@@ -41,7 +42,10 @@ public class IDataServiceImpl implements DataService {
      **/
     @Override
     public void jd() {
-
+        for (int i = 1; i < 100000; i++) {
+            String url = "https://list.jd.com/list.html?cat=9987%2C653%2C655&page=" + i + "&s=1&click=0";
+            grabJdPhone(url);
+        }
     }
 
     @Override
@@ -112,9 +116,19 @@ public class IDataServiceImpl implements DataService {
 
             phoneEntity.setCreateTimeStamp(localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
                     .setCreateTimeString(sdf.format(localDateTime));
-
             //es
-            phoneRepository.save(phoneEntity);
+            this.esSave(phoneEntity);
         }
+    }
+
+    /**
+     * @Description:es插入数据
+     * @Author LinJia
+     * @Date 2020/12/1 3:23 下午
+     * @Param [phoneEntity]
+     * @return void
+     **/
+    private void esSave(PhoneEntity phoneEntity){
+        phoneRepository.save(phoneEntity);
     }
 }
