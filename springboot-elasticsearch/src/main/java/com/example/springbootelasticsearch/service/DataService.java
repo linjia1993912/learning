@@ -7,5 +7,6 @@ package com.example.springbootelasticsearch.service;
  **/
 public interface DataService {
     void jd();
+    void deleteAllPhoneData();
     void export();
 }

@@ -3,6 +3,7 @@ package com.example.springbootelasticsearch.controller;
 import com.example.springbootelasticsearch.service.DataService;
 import com.example.springbootelasticsearch.util.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,31 @@ public class DataController {
      * @Param []
      * @return com.example.springbootelasticsearch.util.ServiceResult
      **/
-    @GetMapping("/grab")
-    public ServiceResult grab() {
-        new Thread(() -> dataService.jd()).start();
+    @GetMapping("/grabData")
+    public ServiceResult grabData() {
+        //new Thread(() -> dataService.jd()).start();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dataService.jd();
+            }
+        });
+        thread.start();
+
         return ServiceResult.success("数据抓取完成");
+    }
+
+    /**
+     * @Description:删除所有数据
+     * @Author LinJia
+     * @Date 2020/12/3 2:41 下午
+     * @Param []
+     * @return com.example.springbootelasticsearch.util.ServiceResult
+     **/
+    @DeleteMapping("/deleteAllPhoneData")
+    public ServiceResult deleteAllPhoneData() {
+        dataService.deleteAllPhoneData();
+        return ServiceResult.success("删除成功");
     }
 }

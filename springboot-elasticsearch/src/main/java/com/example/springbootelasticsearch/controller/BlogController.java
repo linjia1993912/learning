@@ -116,8 +116,8 @@ public class BlogController {
      * @Param []
      * @return com.example.springbootelasticsearch.util.ServiceResult
      **/
-    @DeleteMapping("/delete")
-    public ServiceResult deleteById() {
+    @DeleteMapping("/deleteAll")
+    public ServiceResult deleteAll() {
         blogRepository.deleteAll();
         return ServiceResult.success("删除成功");
     }

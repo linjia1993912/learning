@@ -13,10 +13,11 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Description:数据服务
@@ -27,10 +28,20 @@ import java.time.ZoneId;
 @Slf4j
 public class IDataServiceImpl implements DataService {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
-
     @Autowired
     private PhoneRepository phoneRepository;
+
+    /**
+     * @Description:删除所有文档
+     * @Author LinJia
+     * @Date 2020/12/3 2:40 下午
+     * @Param []
+     * @return void
+     **/
+    @Override
+    public void deleteAllPhoneData(){
+        phoneRepository.deleteAll();
+    }
 
     /**
      * @Description:抓取京东手机数据
@@ -42,7 +53,8 @@ public class IDataServiceImpl implements DataService {
      **/
     @Override
     public void jd() {
-        for (int i = 1; i < 100000; i++) {
+        //100页
+        for (int i = 1; i < 100; i++) {
             String url = "https://list.jd.com/list.html?cat=9987%2C653%2C655&page=" + i + "&s=1&click=0";
             grabJdPhone(url);
         }
@@ -61,7 +73,12 @@ public class IDataServiceImpl implements DataService {
      * @return void
      **/
     private void grabJdPhone(String url){
-        String result = HttpUtils.get(url);
+        String result = null;
+        try {
+            result = HttpUtils.getData(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         log.info("【抓取数据】抓取JD手机信息：{}", result);
         //解析DOM
         Document document = Jsoup.parse(result);
@@ -73,8 +90,9 @@ public class IDataServiceImpl implements DataService {
             log.info("--------------------------------------------------------------");
             //手机图片
             Elements imgElement = element.select(".p-img img");
-            String img = imgElement.attr("src");
+            String img = imgElement.attr("data-lazy-img");
             phoneEntity.setImgUrl(img);
+            log.info("图片:"+img);
             //名称
             Elements nameElement = element.select(".p-name em");
             String name = nameElement.text();
@@ -84,6 +102,7 @@ public class IDataServiceImpl implements DataService {
             Elements adElement = element.select(".p-name i");
             String ad = adElement.text();
             phoneEntity.setAd(ad);
+            log.info("广告语:"+ad);
 
             //手机配置
             Elements attrElements = element.select(".p-name .attr b");
@@ -108,14 +127,16 @@ public class IDataServiceImpl implements DataService {
             String price = priceElement.text();
             if (StringUtils.isNotEmpty(price)) {
                 try {
+                    log.info("价格:"+price);
                     phoneEntity.setPrice(BigDecimal.valueOf(Double.parseDouble(price)));
                 } catch (Exception e) {
-                    log.error(price);
+                    e.printStackTrace();
                 }
             }
-
-            phoneEntity.setCreateTimeStamp(localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
-                    .setCreateTimeString(sdf.format(localDateTime));
+            //localDateTime转Long
+            phoneEntity.setCreateTimeStamp(localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+            //localDateTime转String
+            phoneEntity.setCreateTimeString(localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
             //es
             this.esSave(phoneEntity);
         }
