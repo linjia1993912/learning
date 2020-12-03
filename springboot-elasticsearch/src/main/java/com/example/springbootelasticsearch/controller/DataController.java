@@ -37,7 +37,7 @@ public class DataController {
         });
         thread.start();
 
-        return ServiceResult.success("数据抓取完成");
+        return ServiceResult.success("开始数据抓取");
     }
 
     /**

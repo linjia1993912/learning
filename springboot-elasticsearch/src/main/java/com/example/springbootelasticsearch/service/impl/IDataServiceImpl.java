@@ -58,6 +58,7 @@ public class IDataServiceImpl implements DataService {
             String url = "https://list.jd.com/list.html?cat=9987%2C653%2C655&page=" + i + "&s=1&click=0";
             grabJdPhone(url);
         }
+        log.info("数据抓取完成");
     }
 
     @Override
