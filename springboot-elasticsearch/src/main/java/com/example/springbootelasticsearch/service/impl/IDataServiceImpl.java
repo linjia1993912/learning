@@ -35,7 +35,7 @@ public class IDataServiceImpl implements DataService {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-    private long time = 10 * 1000L;
+    private long time = 5 * 1000L;
 
     /**
      * @Description:删除所有文档
