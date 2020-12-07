@@ -20,7 +20,6 @@ public class ServiceResult {
 
     private STATUS status;
     private String message = "";
-    private String errorMessage = "";
     private Object data;
 
     private ServiceResult() {
@@ -42,14 +41,6 @@ public class ServiceResult {
         this.message = message;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
     public Object getData() {
         return data;
     }
@@ -61,34 +52,25 @@ public class ServiceResult {
     @JsonIgnore
     public static ServiceResult success(String message) {
         ServiceResult info = new ServiceResult();
-        info.status = STATUS.SUCCESS;
-        info.message = message;
+        info.setStatus(STATUS.SUCCESS);
+        info.setMessage(message);
         return info;
     }
 
     @JsonIgnore
     public static ServiceResult success(String message, Object data) {
         ServiceResult info = new ServiceResult();
-        info.status = STATUS.SUCCESS;
-        info.message = message;
-        info.data = data;
+        info.setStatus(STATUS.SUCCESS);
+        info.setMessage(message);
+        info.setData(data);
         return info;
     }
 
     @JsonIgnore
     public static ServiceResult failure(String message) {
         ServiceResult info = new ServiceResult();
-        info.status = STATUS.FAILURE;
-        info.message = message;
-        return info;
-    }
-
-    @JsonIgnore
-    public static ServiceResult failure(String message, String errorMessage) {
-        ServiceResult info = new ServiceResult();
-        info.status = STATUS.FAILURE;
-        info.message = message;
-        info.errorMessage = errorMessage;
+        info.setStatus(STATUS.FAILURE);
+        info.setMessage(message);
         return info;
     }
 }
