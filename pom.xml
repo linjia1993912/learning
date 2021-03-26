@@ -40,6 +40,8 @@
         <module>sc-f-gateway-limiter</module>
         <module>service-gateway</module>
         <module>spring-learning</module>
+        <module>springboot-start</module>
+        <module>springboot-start-test</module>
     </modules>
 
     <dependencies>
