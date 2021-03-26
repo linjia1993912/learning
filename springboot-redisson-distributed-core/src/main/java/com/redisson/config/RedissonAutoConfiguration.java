@@ -19,7 +19,9 @@ import org.springframework.core.annotation.Order;
  * @Date 2020/6/19
  **/
 @Configuration
-@ConditionalOnClass(Redisson.class) //如果存在redisson 则加载RedissonAutoConfiguration配置类（自动装配）
+@ConditionalOnClass(Redisson.class) //条件过滤，如果存在redisson 则加载RedissonAutoConfiguration配置类（自动装配）
+//也可以在spring.factories加上配置com.gupaoedu.practice.GuPaoConfig.ConditionalOnClass=com.gupaoedu.TestClass，等同上面注解
+
 //如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean
 //@EnableConfigurationProperties 相当于把使用 @ConfigurationProperties 的类进行了一次注入
 @EnableConfigurationProperties(RedissonProperties.class) //使使用 @ConfigurationProperties 注解的类生效
