@@ -1,7 +1,7 @@
 
 ##项目概述
 redis实现分布式锁
-springboot-redisson-distributed-core可以当作为一个组件，pom引入会自动装配
+springboot-redisson-distributed-core可以当作为一个start组件，pom引入会自动装配
 
 ##技术架构
 SpringBoot2.1.5 + Maven3.5.4 + Redisson3.5.4 + lombok(插件)
