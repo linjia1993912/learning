@@ -2,13 +2,7 @@
 本工程为学习使用
 
 #模块说明  
-springboot-demo为学习SpringBoot以及Java基础代码  
-springboot-shiro-jwt为学习练习SpringBoot集成Shiro、JWT的demo  
-spring-security为学习练习Spring Security安全框架项目  
-springboot-mybatis为学习练习springboot整合mybatis  
-springboot-redis为学习redis相关,包括redis实现分布式锁  
-springboot-redisson-distributed-core、springboot-redisson-distributed-web-test为redisson实现分布式锁项目 
-spring-learning 学习Spring基础 
+参考各个模块HELP.md
 
 #整合SpringCloud  
   
