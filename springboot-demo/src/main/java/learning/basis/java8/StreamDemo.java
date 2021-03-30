@@ -77,13 +77,25 @@ public class StreamDemo {
         );
         System.out.println(unique);
 
+        //Java7排序
+        Collections.sort(appleList, new Comparator<Apple>() {
+            @Override
+            public int compare(Apple o1, Apple o2) {
+                return o1.getNum().compareTo(o2.getNum());
+            }
+        });
+        System.out.println("Java7排序="+appleList);
+
+        //Java8排序
         //根据num排序
         //正序
-        appleList.sort((a,b) -> a.getNum() - b.getNum());
-        System.out.println(appleList);
+        Collections.sort(appleList,(s1,s2) -> s1.getNum().compareTo(s2.getNum()));
+        System.out.println("Java8排序="+appleList);
+
         //倒序
         appleList.sort(Comparator.comparingInt(Apple::getNum).reversed());
         System.out.println(appleList);
+
 
 
     }
