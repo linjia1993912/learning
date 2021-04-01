@@ -42,6 +42,7 @@
         <module>spring-learning</module>
         <module>springboot-start</module>
         <module>springboot-start-test</module>
+        <module>springboot-quartz</module>
     </modules>
 
     <dependencies>
