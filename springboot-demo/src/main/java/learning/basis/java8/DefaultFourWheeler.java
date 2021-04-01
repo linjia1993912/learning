@@ -6,7 +6,7 @@ package learning.basis.java8;
  * 多个默认方法
  * @date 2021/3/30
  */
-public interface FourWheeler {
+public interface DefaultFourWheeler {
     //default
     default void print(){
         System.out.println("我是一辆四轮车!");

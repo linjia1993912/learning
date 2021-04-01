@@ -5,15 +5,15 @@ package learning.basis.java8;
  * @description: 一个接口有默认方法，考虑这样的情况，一个类实现了多个接口，且这些接口有相同的默认方法，以下实例说明了这种情况的解决方法：
  * @date 2021/3/30
  */
-public class Car2 implements Vehicle, FourWheeler {
+public class Car2 implements DefaultVehicle, DefaultFourWheeler {
 
     //第一个解决方案是创建自己的默认方法，来覆盖重写接口的默认方法：
     @Override
     public void print() {
-        Vehicle.super.print();
-        FourWheeler.super.print();
+        DefaultVehicle.super.print();
+        DefaultFourWheeler.super.print();
         //静态默认方法
-        Vehicle.blowHorn();
+        DefaultVehicle.blowHorn();
         System.out.println("我是一辆四轮汽车!");
     }
 
@@ -24,7 +24,7 @@ public class Car2 implements Vehicle, FourWheeler {
     }*/
 
     public static void main(String[] args) {
-        Vehicle vehicle = new Car2();
+        DefaultVehicle vehicle = new Car2();
         vehicle.print();
     }
 }

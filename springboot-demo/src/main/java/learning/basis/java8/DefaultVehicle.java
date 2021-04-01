@@ -13,7 +13,7 @@ package learning.basis.java8;
  * 他们的目的是为了解决接口的修改与现有的实现不兼容的问题。
  * @date 2021/3/30
  */
-public interface Vehicle {
+public interface DefaultVehicle {
     //default
     default void print(){
         System.out.println("我是一辆车");
