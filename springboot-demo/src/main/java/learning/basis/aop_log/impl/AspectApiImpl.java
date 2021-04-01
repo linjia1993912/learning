@@ -1,5 +1,6 @@
-package learning.aspect;
+package learning.basis.aop_log.impl;
 
+import learning.basis.aop_log.IAspectAPI;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.lang.reflect.Method;

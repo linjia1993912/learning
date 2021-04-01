@@ -1,4 +1,4 @@
-package learning.interface_security.interceptor;
+package learning.interface_security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

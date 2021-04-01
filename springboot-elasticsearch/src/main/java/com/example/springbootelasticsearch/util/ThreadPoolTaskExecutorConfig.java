@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @Date 2019/10/25
  **/
 @Configuration
-@EnableAsync
+@EnableAsync //开启异步支持
 public class ThreadPoolTaskExecutorConfig {
 
 

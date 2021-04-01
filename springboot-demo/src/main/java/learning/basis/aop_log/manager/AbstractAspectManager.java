@@ -1,5 +1,6 @@
-package learning.aspect;
+package learning.basis.aop_log.manager;
 
+import learning.basis.aop_log.IAspectAPI;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.lang.reflect.Method;
@@ -34,6 +35,7 @@ public abstract class AbstractAspectManager implements IAspectAPI {
      * @Param [pjp, method]
      * @return java.lang.Object
      **/
+    @Override
     public Object doHandlerAspect(ProceedingJoinPoint pjp, Method method) throws Throwable {
         return iAspectAPI.doHandlerAspect(pjp,method);
     }

@@ -1,11 +1,11 @@
 
 #验证token参数url
-author.token.url: http://localhost:8080/authorToken
-#是否开启服务验证参数 默认开启
+author.token.url: http://localhost:8080/recordingLog #模拟验证接口
+#是否开启服务验证参数
 isAuthorToken: false
 
 #配置线程数
-executorPoolSize: 1
+executorPoolSize: 4
 
 #获取配置文件的值
 #my:
@@ -32,7 +32,8 @@ my:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mytest?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+#    url: jdbc:mysql://localhost:3306/mytest?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    url: jdbc:mysql://localhost:3306/mytest?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&useSSL=false
     username: root
     password: 123456
 

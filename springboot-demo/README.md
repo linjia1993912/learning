@@ -4,7 +4,6 @@
 包括验证token、注解方式记录访问日志、根据SpringBoot实战书籍编码
 
 **自定义注解记录日志**
-
 ```java
      @Log
      @PostMapping("/authToken")
@@ -20,12 +19,6 @@ springboot-demo
 ---src
       |
       ---learning
-                           |# 自定义注解
-                           ---annotation
-                           |# 配置类
-                           ---config
-                           |# AOP解析注解
-                           ---aspect
                            |# 测试controller
                            ---controller
                            |# 学习《SpringBoot》实战代码
@@ -46,6 +39,8 @@ springboot-demo
                                 ---future
                            |# 基础随写代码
                            ---basis
+                                |# AOP日志切面
+                                ---aop_log
                                 |# 代理模式示例代码
                                 ---proxy
                                 |# 泛型示例代码
@@ -86,3 +81,4 @@ springboot-demo
                                    ---interceptor
                          
 ```
+

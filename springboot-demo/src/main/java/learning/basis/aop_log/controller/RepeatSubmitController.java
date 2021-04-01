@@ -1,6 +1,6 @@
-package learning.interface_security.controller;
+package learning.basis.aop_log.controller;
 
-import learning.annotation.InterfaceSecurity;
+import learning.basis.aop_log.annotation.InterfaceSecurity;
 import org.apache.commons.collections4.map.LRUMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

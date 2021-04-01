@@ -1,4 +1,4 @@
-package learning.aspect;
+package learning.basis.aop_log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 

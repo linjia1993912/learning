@@ -1,4 +1,4 @@
-package learning.annotation;
+package learning.basis.aop_log.annotation;
 
 import java.lang.annotation.*;
 

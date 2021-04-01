@@ -1,5 +1,6 @@
-package learning.aspect;
+package learning.basis.aop_log.manager;
 
+import learning.basis.aop_log.IAspectAPI;
 import org.apache.commons.collections4.map.LRUMap;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
@@ -12,16 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
- * @Description:幂等性验证 切面
+ * @Description: 继承AbstractAspectManager进行扩展
+ * 幂等性验证
  * 验证数据重复提交
  * @Author LinJia
  * @Date 2020/11/2
  **/
-public class InterfaceSecurityAspect extends AbstractAspectManager {
+public class InterfaceAspectManager extends AbstractAspectManager {
 
-    private Logger logger = LoggerFactory.getLogger(InterfaceSecurityAspect.class);
+    private Logger logger = LoggerFactory.getLogger(InterfaceAspectManager.class);
 
-    public InterfaceSecurityAspect(IAspectAPI iAspectAPI){
+    public InterfaceAspectManager(IAspectAPI iAspectAPI){
         super(iAspectAPI);
     }
 

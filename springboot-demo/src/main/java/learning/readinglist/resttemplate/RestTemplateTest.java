@@ -19,8 +19,8 @@ public class RestTemplateTest implements CommandLineRunner {
     //测试消费服务
     @Override
     public void run(String... args) throws Exception {
-        String quote = restTemplate.getForObject(
+        /*String quote = restTemplate.getForObject(
                 "http://gturnquist-quoters.cfapps.io/api/random", String.class);
-        System.out.println(quote.toString());
+        System.out.println("RestTemplate测试消费服务----"+quote);*/
     }
 }

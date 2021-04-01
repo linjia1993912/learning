@@ -1,4 +1,4 @@
-package learning.interface_security.interceptor;
+package learning.interface_security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
