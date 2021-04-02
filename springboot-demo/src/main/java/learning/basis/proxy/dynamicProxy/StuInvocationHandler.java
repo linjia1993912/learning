@@ -30,8 +30,6 @@ public class StuInvocationHandler<T> implements InvocationHandler {
      * proxy:代表动态代理对象
      * method：代表正在执行的方法
      * args：代表调用目标方法时传入的实参
-     *
-     *
      * 动态代理的优势在于可以很方便的对代理类的函数进行统一的处理，而不用修改每个代理类中的方法。
      * 是因为所有被代理执行的方法，都是通过在InvocationHandler中的invoke方法调用的，所以我们只要在invoke方法中统一处理，
      * 就可以对所有被代理的方法进行相同的操作了
