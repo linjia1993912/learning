@@ -92,6 +92,10 @@ public class StreamDemo {
         appleList.add(apple2);
         appleList.add(apple3);
 
+        //提取某一列
+        List<String> collect = appleList.stream().map(Apple::getName).collect(Collectors.toList());
+        collect.forEach(System.out::println);
+
         //分组
         //List里面的对象元素，以某个属性来分组，例如，以id分组，将id相同的放在一起：
         Map<Integer, List<Apple>> groupBy = appleList.stream().collect(Collectors.groupingBy(Apple::getId));
