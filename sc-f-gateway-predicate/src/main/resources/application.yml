@@ -133,3 +133,6 @@ spring:
         predicates:
         - Query=foo
   profiles: query_route
+
+
+# 参考文章 https://www.fangzhipeng.com/springcloud/2018/12/05/sc-f-gateway2.html
