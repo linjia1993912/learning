@@ -92,6 +92,10 @@ public class StreamDemo {
         appleList.add(apple2);
         appleList.add(apple3);
 
+        //提取某一列
+        List<String> collect = appleList.stream().map(Apple::getName).collect(Collectors.toList());
+        collect.forEach(System.out::println);
+
         //分组
         //List里面的对象元素，以某个属性来分组，例如，以id分组，将id相同的放在一起：
         Map<Integer, List<Apple>> groupBy = appleList.stream().collect(Collectors.groupingBy(Apple::getId));
@@ -170,6 +174,25 @@ public class StreamDemo {
         appleList.sort(Comparator.comparingInt(Apple::getNum).reversed());
         System.out.println(appleList);
 
+    }
 
+   static class Demo3{
+
+        public static void main(String[] args) {
+            List<Apple> appleList = new ArrayList<>();
+
+            Apple apple1 = new Apple(1, "苹果1", new BigDecimal("3.25"), 10);
+            Apple apple12 = new Apple(1, "苹果2", new BigDecimal("1.35"), 20);
+            Apple apple2 = new Apple(2, "香蕉", new BigDecimal("2.89"), 30);
+            Apple apple3 = new Apple(3, "荔枝", new BigDecimal("9.99"), 40);
+
+            appleList.add(apple1);
+            appleList.add(apple12);
+            appleList.add(apple2);
+            appleList.add(apple3);
+            //从list提取某个值
+            String s = appleList.stream().filter(apple -> apple.getId() == 3).findFirst().map(Apple::getName).orElse(null);
+            System.out.println(s);
+        }
     }
 }
