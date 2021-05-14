@@ -8,7 +8,7 @@ public class SortLargeFile {
     public final int BUFFER_SIZE = 100000;
     /**
      *  从文件中读取每个数据段，进行排序之后存储在一个新的文件中
-     * @param segmentSize 分段的打下
+     * @param segmentSize 分段的大小
      * @param originalFile 存储大容量数据的文件
      * @param f1 一个新的文件名
      * @return 返回大容量数据分段的个数
