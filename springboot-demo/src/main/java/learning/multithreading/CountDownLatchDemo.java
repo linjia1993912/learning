@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * @Author LinJia
  * @Date 2020/9/3
  **/
-public class CountDownLatch_Demo {
+public class CountDownLatchDemo {
 
     //调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行
     //public void await() throws InterruptedException { };
