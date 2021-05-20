@@ -12,11 +12,12 @@ import java.util.concurrent.Executors;
  *
  * 是通过一个计数器来实现的，计数器的初始值是线程的数量。每当一个线程执行完毕后，计数器的值就-1，当计数器的值为0时，
  * 表示所有线程都执行完毕，然后在闭锁上等待的线程就可以恢复工作了
+ *
+ * 参考文章 https://www.fangzhipeng.com/javainterview/2019/03/21/latch-barrier-semaphore.html
  * @Author LinJia
  * @Date 2020/9/3
  **/
 public class CountDownLatch_Demo {
-
 
     //调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行
     //public void await() throws InterruptedException { };
@@ -28,15 +29,38 @@ public class CountDownLatch_Demo {
     //示例
     public static void main(String[] args) {
         CountDownLatch latch = new CountDownLatch(2);
-        System.out.println("主线程开始执行…… ……");
-        //第一个子线程执行
+        System.out.println("主线程开始执行……");
+
+        new Thread(()-> {
+            try{
+                System.out.println("子线程："+Thread.currentThread().getName()+"执行");
+                Thread.sleep(3000);
+                //计数器-1
+                latch.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        new Thread(()-> {
+            try {
+                System.out.println("子线程："+Thread.currentThread().getName()+"执行");
+                Thread.sleep(6000);
+                //计数器-1
+                latch.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        /*//第一个子线程执行
         ExecutorService es1 = Executors.newSingleThreadExecutor();
         es1.execute(new Runnable() {
             @Override
             public void run() {
                 try{
-                    Thread.sleep(3000);
                     System.out.println("子线程："+Thread.currentThread().getName()+"执行");
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -45,16 +69,16 @@ public class CountDownLatch_Demo {
             }
         });
 
-        es1.shutdown();
+        es1.shutdown();*/
 
         //第二个子线程执行
-        ExecutorService es2 = Executors.newSingleThreadExecutor();
+        /*ExecutorService es2 = Executors.newSingleThreadExecutor();
         es2.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(6000);
                     System.out.println("子线程："+Thread.currentThread().getName()+"执行");
+                    Thread.sleep(6000);
                     latch.countDown();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -62,17 +86,15 @@ public class CountDownLatch_Demo {
             }
         });
 
-        es2.shutdown();
-
-        System.out.println("等待两个线程执行完毕…… ……");
+        es2.shutdown();*/
 
         try {
+            System.out.println("等待两个线程执行完毕…… ……");
             latch.await();
+            System.out.println("两个子线程都执行完毕，继续执行主线程");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        System.out.println("两个子线程都执行完毕，继续执行主线程");
     }
 
 
